@@ -1,3 +1,5 @@
+import PayloadUpload from '@/app/components/PayloadUpload'
+
 export default function PortuguesePage() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -8,6 +10,9 @@ export default function PortuguesePage() {
                 <p className="mt-3 text-2xl">
                     Idioma atual: <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">pt</code>
                 </p>
+                <div className="mt-8">
+                    <PayloadUpload />
+                </div>
             </main>
         </div>
     )

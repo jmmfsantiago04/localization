@@ -1,4 +1,4 @@
-import FileUpload from '@/app/components/FileUpload'
+import PayloadUpload from '@/app/components/PayloadUpload'
 
 export default function EnglishPage() {
     return (
@@ -11,7 +11,7 @@ export default function EnglishPage() {
                     Current language: <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">en</code>
                 </p>
                 <div className="mt-8">
-                    <FileUpload />
+                    <PayloadUpload />
                 </div>
             </main>
         </div>
