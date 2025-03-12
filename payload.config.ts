@@ -10,6 +10,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
 import UploadthingFiles from './collections/UploadthingFiles'
 
 const filename = fileURLToPath(import.meta.url)
@@ -22,12 +23,30 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Español',
+        code: 'es',
+      },
+      {
+        label: 'Português',
+        code: 'pt',
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   upload: {
     limits: {
       fileSize: 5000000, // 5MB, written in bytes
     },
   },
-  collections: [Users, Media, UploadthingFiles],
+  collections: [Users, Media, Pages, UploadthingFiles],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

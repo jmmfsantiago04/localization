@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { uploadFile } from '../actions/uploadFile';
 
 export default function PayloadUpload() {
     const [uploading, setUploading] = useState(false);
@@ -10,23 +11,14 @@ export default function PayloadUpload() {
         if (!e.target.files?.[0]) return;
 
         setUploading(true);
-        const file = e.target.files[0];
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', e.target.files[0]);
 
         try {
-            const response = await fetch('/api/uploadthing-files', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Upload failed');
+            const result = await uploadFile(formData);
+            if (result.url) {
+                setImageUrl(result.url);
             }
-
-            const data = await response.json();
-            setImageUrl(data.doc.url);
         } catch (error) {
             console.error('Upload error:', error);
             alert('Failed to upload file');

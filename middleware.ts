@@ -18,6 +18,13 @@ export function middleware(request: NextRequest) {
         return NextResponse.next()
     }
 
+    // Redirect root path to pages overview
+    if (pathname === '/') {
+        return NextResponse.redirect(
+            new URL(`/${defaultLocale}/pages`, request.url)
+        )
+    }
+
     // Check if the pathname starts with a locale
     const pathnameHasLocale = locales.some(
         (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -26,7 +33,7 @@ export function middleware(request: NextRequest) {
     // If no locale in pathname, redirect to default locale
     if (!pathnameHasLocale) {
         return NextResponse.redirect(
-            new URL(`/${defaultLocale}${pathname === '/' ? '' : pathname}`, request.url)
+            new URL(`/${defaultLocale}${pathname}`, request.url)
         )
     }
 
